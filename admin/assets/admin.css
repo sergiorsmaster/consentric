@@ -118,6 +118,95 @@ hr {
 }
 
 /* -----------------------------------------------------------------------------
+   Jurisdiction cards
+   ----------------------------------------------------------------------------- */
+
+.scc-field--top {
+	align-items: start;
+}
+
+.scc-jurisdiction-options {
+	display:        flex;
+	flex-direction: column;
+	gap:            12px;
+}
+
+.scc-jurisdiction-card {
+	display:       block;
+	border:        2px solid #dcdcde;
+	border-radius: 6px;
+	padding:       14px 16px;
+	cursor:        pointer;
+	transition:    border-color .15s ease, background .15s ease;
+	background:    #fff;
+}
+
+.scc-jurisdiction-card:hover {
+	border-color: #2271b1;
+	background:   #f6f7f7;
+}
+
+.scc-jurisdiction-card.is-selected {
+	border-color: #2271b1;
+	background:   #f0f6fc;
+}
+
+.scc-jurisdiction-card__header {
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+	margin-bottom: 6px;
+}
+
+.scc-jurisdiction-radio {
+	flex-shrink: 0;
+	margin:      0;
+}
+
+.scc-jurisdiction-card__title {
+	font-weight: 600;
+	font-size:   14px;
+	flex:        1;
+}
+
+.scc-jurisdiction-card__model {
+	font-size:     11px;
+	font-weight:   600;
+	padding:       2px 8px;
+	border-radius: 20px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+}
+
+.scc-model--gdpr,
+.scc-model--lgpd {
+	background: #d7f0e0;
+	color:      #1a6b3c;
+}
+
+.scc-model--ccpa {
+	background: #fde8c8;
+	color:      #7a4500;
+}
+
+.scc-jurisdiction-card__summary {
+	margin:    0 0 8px 24px;
+	font-size: 13px;
+	color:     #50575e;
+}
+
+.scc-jurisdiction-card__details {
+	margin:     0 0 0 24px;
+	padding:    0 0 0 16px;
+	font-size:  12px;
+	color:      #646970;
+}
+
+.scc-jurisdiction-card__details li {
+	margin-bottom: 2px;
+}
+
+/* -----------------------------------------------------------------------------
    Responsive — collapse 2-col to 1-col on small screens
    ----------------------------------------------------------------------------- */
 

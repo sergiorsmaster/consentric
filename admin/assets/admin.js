@@ -53,4 +53,16 @@
 		$btn.hide();
 	} );
 
+	// Jurisdiction cards — highlight selected + show/hide CCPA field
+	$( document ).on( 'change', '.scc-jurisdiction-radio', function () {
+		$( '.scc-jurisdiction-card' ).removeClass( 'is-selected' );
+		$( this ).closest( '.scc-jurisdiction-card' ).addClass( 'is-selected' );
+
+		if ( $( this ).val() === 'ccpa' ) {
+			$( '.scc-ccpa-field' ).show();
+		} else {
+			$( '.scc-ccpa-field' ).hide();
+		}
+	} );
+
 } )( jQuery );

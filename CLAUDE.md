@@ -39,7 +39,7 @@ Tasks are tracked in order below. Status: [ ] pending | [~] in progress | [x] do
 ### Phase 3 — Admin settings
 - [x] FEAT-09: Admin menu + General settings tab (texts, logo, legal page links)
 - [x] FEAT-10: Appearance tab (position, colors, custom CSS)
-- [ ] FEAT-11: Jurisdiction tab (GDPR / LGPD / CCPA selector)
+- [x] FEAT-11: Jurisdiction tab (GDPR / LGPD / CCPA selector)
 - [ ] FEAT-12: Integrations tab (GTM toggle + mode, Site Kit info)
 
 ### Phase 4 — Cookie scanner

@@ -62,7 +62,6 @@ class SCC_Admin {
 			'scc_cookie_policy_page'    => 'absint',
 			'scc_imprint_page'          => 'absint',
 			'scc_show_preferences_icon' => 'scc_sanitize_checkbox',
-			'scc_ccpa_opt_out_text'     => 'sanitize_text_field',
 		) as $option => $cb ) {
 			register_setting( 'scc_general', $option, array( 'sanitize_callback' => $cb ) );
 		}
@@ -79,9 +78,12 @@ class SCC_Admin {
 		}
 
 		// Jurisdiction
-		register_setting( 'scc_jurisdiction', 'scc_jurisdiction', array(
-			'sanitize_callback' => 'sanitize_text_field',
-		) );
+		foreach ( array(
+			'scc_jurisdiction'      => 'sanitize_text_field',
+			'scc_ccpa_opt_out_text' => 'sanitize_text_field',
+		) as $option => $cb ) {
+			register_setting( 'scc_jurisdiction', $option, array( 'sanitize_callback' => $cb ) );
+		}
 
 		// Integrations
 		foreach ( array(
