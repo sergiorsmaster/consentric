@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    name: Build & publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build plugin zip
+        run: |
+          ZIP_NAME="simple-cookie-consent-${{ steps.version.outputs.VERSION }}.zip"
+          echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
+
+          # Create a staging directory with the correct plugin slug as root folder
+          mkdir -p /tmp/build/simple-cookie-consent
+
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.claude' \
+            --exclude='CLAUDE.md' \
+            --exclude='README.md' \
+            --exclude='CODE_OF_CONDUCT.md' \
+            --exclude='docker-compose.yml' \
+            --exclude='.env*' \
+            --exclude='node_modules' \
+            --exclude='*.log' \
+            ./ /tmp/build/simple-cookie-consent/
+
+          cd /tmp/build
+          zip -r "$ZIP_NAME" simple-cookie-consent/
+          mv "$ZIP_NAME" "$GITHUB_WORKSPACE/"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: ${{ env.ZIP_NAME }}
