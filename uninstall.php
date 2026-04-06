@@ -6,8 +6,12 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb;
 
-// Drop the cookies table
+// Drop the cookies table.
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}scc_cookies" );
 
-// Delete all plugin options
+// Delete all plugin options (scc_* keys).
 $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'scc\_%'" );
+
+// Delete the cookie DB index transient and its timeout companion.
+// (WordPress stores transients as _transient_<key> + _transient_timeout_<key>)
+delete_transient( 'scc_cookie_db_index' );
