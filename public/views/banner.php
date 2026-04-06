@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	role="dialog"
 	aria-modal="true"
 	aria-labelledby="scc-banner-title"
+	tabindex="-1"
 	style="display:none">
 
 	<div class="scc-banner__inner">

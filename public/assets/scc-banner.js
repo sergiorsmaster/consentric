@@ -16,7 +16,43 @@
 	var banner  = document.getElementById( 'scc-banner' );
 	if ( ! banner ) return;
 
-	var overlay = document.querySelector( '.scc-banner-overlay' );
+	var overlay   = document.querySelector( '.scc-banner-overlay' );
+	var isModal   = banner.classList.contains( 'scc-position-center-modal' );
+
+	// -------------------------------------------------------------------------
+	// Focus trap helpers (used for center-modal position only)
+	// -------------------------------------------------------------------------
+
+	var FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), ' +
+		'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+	function getFocusable( container ) {
+		return Array.prototype.slice.call( container.querySelectorAll( FOCUSABLE ) )
+			.filter( function ( el ) { return el.offsetParent !== null; } );
+	}
+
+	if ( isModal ) {
+		banner.addEventListener( 'keydown', function ( e ) {
+			if ( e.key !== 'Tab' ) return;
+			var focusable = getFocusable( banner );
+			if ( ! focusable.length ) return;
+
+			var first = focusable[ 0 ];
+			var last  = focusable[ focusable.length - 1 ];
+
+			if ( e.shiftKey ) {
+				if ( document.activeElement === first ) {
+					e.preventDefault();
+					last.focus();
+				}
+			} else {
+				if ( document.activeElement === last ) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
+		} );
+	}
 
 	// Preview mode: force-show banner even if consent is already stored.
 	// Only active for logged-in admins (gated server-side via sccSettings.preview).
@@ -28,6 +64,15 @@
 		banner.style.display = '';
 		if ( overlay ) overlay.style.display = '';
 		SCC.log( isPreview ? 'Banner: showing (preview mode)' : 'Banner: showing (no prior consent)' );
+
+		// Move focus into the banner: for center-modal focus the dialog itself,
+		// for bars focus the first button so keyboard users can act immediately.
+		if ( isModal ) {
+			banner.focus();
+		} else {
+			var firstBtn = banner.querySelector( 'button' );
+			if ( firstBtn ) firstBtn.focus();
+		}
 	} else {
 		SCC.log( 'Banner: hidden (consent already stored)' );
 	}
