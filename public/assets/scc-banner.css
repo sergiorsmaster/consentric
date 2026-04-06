@@ -31,6 +31,11 @@
 	box-shadow: var(--scc-shadow);
 	border: var(--scc-border);
 	box-sizing: border-box;
+	outline: none; /* suppress focus ring — banner is a container, not interactive */
+}
+
+.scc-banner:focus-visible {
+	outline: none;
 }
 
 .scc-banner__inner {

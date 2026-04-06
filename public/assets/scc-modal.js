@@ -21,17 +21,33 @@
 	var btnDeny  = document.getElementById( 'scc-modal-deny' );
 	var inputs   = modal.querySelectorAll( '.scc-toggle__input[data-category]' );
 
+	/** Element that had focus before the modal opened — restored on close. */
+	var lastFocusedElement = null;
+
+	// -------------------------------------------------------------------------
+	// Focus trap helpers
+	// -------------------------------------------------------------------------
+
+	var FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), ' +
+		'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+	function getFocusable( container ) {
+		return Array.prototype.slice.call( container.querySelectorAll( FOCUSABLE ) )
+			.filter( function ( el ) { return el.offsetParent !== null; } );
+	}
+
 	// -------------------------------------------------------------------------
 	// Open / close
 	// -------------------------------------------------------------------------
 
 	function openModal() {
+		lastFocusedElement = document.activeElement;
 		populateToggles();
 		modal.style.display = '';
 		document.body.style.overflow = 'hidden';
 		SCC.log( 'Modal: opened' );
 
-		// Focus the close button for accessibility
+		// Move focus to the close button (first interactive element)
 		if ( btnClose ) btnClose.focus();
 	}
 
@@ -39,6 +55,11 @@
 		modal.style.display = 'none';
 		document.body.style.overflow = '';
 		SCC.log( 'Modal: closed' );
+
+		// Return focus to the element that triggered the modal
+		if ( lastFocusedElement && typeof lastFocusedElement.focus === 'function' ) {
+			lastFocusedElement.focus();
+		}
 	}
 
 	// -------------------------------------------------------------------------
@@ -95,10 +116,35 @@
 		btnClose.addEventListener( 'click', closeModal );
 	}
 
-	// Close on Escape key
+	// Close on Escape key + focus trap (Tab / Shift+Tab cycles within modal)
 	document.addEventListener( 'keydown', function ( e ) {
-		if ( e.key === 'Escape' && modal.style.display !== 'none' ) {
+		if ( modal.style.display === 'none' ) return;
+
+		if ( e.key === 'Escape' ) {
 			closeModal();
+			return;
+		}
+
+		if ( e.key === 'Tab' ) {
+			var focusable = getFocusable( modal.querySelector( '.scc-modal__box' ) || modal );
+			if ( ! focusable.length ) return;
+
+			var first = focusable[ 0 ];
+			var last  = focusable[ focusable.length - 1 ];
+
+			if ( e.shiftKey ) {
+				// Shift+Tab — wrap backwards
+				if ( document.activeElement === first ) {
+					e.preventDefault();
+					last.focus();
+				}
+			} else {
+				// Tab — wrap forwards
+				if ( document.activeElement === last ) {
+					e.preventDefault();
+					first.focus();
+				}
+			}
 		}
 	} );
 

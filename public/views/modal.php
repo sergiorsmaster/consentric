@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	aria-labelledby="scc-modal-title"
 	style="display:none">
 
-	<div class="scc-modal__overlay" id="scc-modal-overlay"></div>
+	<div class="scc-modal__overlay" id="scc-modal-overlay" aria-hidden="true" tabindex="-1"></div>
 
 	<div class="scc-modal__box">
 
@@ -77,6 +77,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<label class="scc-toggle" aria-label="<?php echo esc_attr( $cat['label'] ); ?>">
 								<input
 									type="checkbox"
+									role="switch"
 									class="scc-toggle__input"
 									name="scc_<?php echo esc_attr( $key ); ?>"
 									value="1"
