@@ -7,6 +7,7 @@ class SCC_Activator {
 
 	public static function activate() {
 		self::create_tables();
+		self::seed_own_cookie();
 		self::set_default_options();
 		// Flush cached cookie DB index so it is rebuilt with the current CSV.
 		delete_transient( 'scc_cookie_db_index' );
@@ -34,6 +35,40 @@ class SCC_Activator {
 		dbDelta( $sql );
 
 		update_option( 'scc_db_version', SCC_VERSION );
+	}
+
+	/**
+	 * Seed the plugin's own consent cookie into the cookie list table so it
+	 * always appears in [scc_cookie_list] without requiring a manual scan.
+	 * Uses INSERT IGNORE so re-activation or table upgrades never duplicate it.
+	 */
+	private static function seed_own_cookie() {
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'scc_cookies';
+
+		// Check if the row already exists to avoid duplicate-key errors on
+		// hosts where IGNORE may not suppress all warnings.
+		$exists = $wpdb->get_var(
+			$wpdb->prepare( "SELECT id FROM {$table} WHERE cookie_name = %s LIMIT 1", 'scc_consent' )
+		);
+
+		if ( $exists ) {
+			return;
+		}
+
+		$wpdb->insert(
+			$table,
+			array(
+				'cookie_name' => 'scc_consent',
+				'category'    => 'necessary',
+				'service'     => 'Simple Cookie Consent',
+				'duration'    => '1 year',
+				'description' => 'Stores the visitor\'s cookie consent preferences (categories granted/denied, timestamp, version). Set by this plugin.',
+				'source'      => 'manual',
+			),
+			array( '%s', '%s', '%s', '%s', '%s', '%s' )
+		);
 	}
 
 	private static function set_default_options() {

@@ -57,6 +57,16 @@ Tasks are tracked in order below. Status: [ ] pending | [~] in progress | [x] do
 - [x] FEAT-19: Uninstall cleanup (drop table, delete options)
 - [x] FEAT-20: readme.txt for WordPress.org
 
+### Phase 7 — Developer experience, polish & repository health
+- [~] FEAT-22: Register scc_consent cookie in DB on activation
+- [ ] FEAT-23: Replace preferences icon with cookie SVG
+- [ ] FEAT-24: Banner preview via ?scc_preview=1 URL param + admin link
+- [ ] FEAT-25: Admin Help tab (CSS classes, shortcodes, JS API reference)
+- [ ] FEAT-26: Accessibility review (focus trap, tabindex, aria-checked)
+- [ ] FEAT-27: README.md for developers (Docker setup, contributing, AI workflow)
+- [ ] FEAT-28: GitHub Actions release workflow (zip + GitHub Release on tag push)
+- [ ] FEAT-29: License fix (GPL v2) + CODE_OF_CONDUCT.md
+
 ## Code conventions
 
 - PHP prefix: `scc_` on all functions, classes, hooks, options.
