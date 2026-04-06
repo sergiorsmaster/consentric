@@ -124,9 +124,11 @@ $page_url = admin_url('options-general.php?page=scc-cookie-consent&tab=cookies')
 	<p class="scc-cookie-db-status">
 		<?php
 		printf(
-			/* translators: %d: number of cookies in bundled database */
-			esc_html__( 'Cookie database: %d entries loaded.', 'simple-cookie-consent' ),
-			$db_count
+			/* translators: 1: number of cookies, 2: opening <a> tag, 3: closing </a> tag */
+			esc_html__( 'Cookie database: %1$d entries loaded from the %2$sOpen Cookie Database%3$s.', 'simple-cookie-consent' ),
+			$db_count,
+			'<a href="https://github.com/jkwakman/Open-Cookie-Database" target="_blank" rel="noopener noreferrer">',
+			'</a>'
 		);
 		?>
 	</p>
