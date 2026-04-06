@@ -49,6 +49,8 @@ class SCC_Activator {
 			'scc_color_accent'       => '#0073aa',
 			'scc_gtm_enabled'        => '0',
 			'scc_gtm_mode'           => 'basic',
+			'scc_gtm_wait_for_update'=> '500',
+			'scc_debug'              => '0',
 		);
 
 		foreach ( $defaults as $key => $value ) {

@@ -13,6 +13,9 @@
  *   "timestamp": 1712345678,
  *   "version": "1"
  * }
+ *
+ * Debug mode: set sccSettings.debug = true (passed from PHP via wp_localize_script).
+ * When enabled, all consent actions are logged to the browser console.
  */
 
 window.SimpleCookieConsent = window.SimpleCookieConsent || {};
@@ -23,17 +26,38 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	var COOKIE_VERSION = '1';
 	var COOKIE_DAYS    = 365;
 
+	// Debug flag — set by PHP via wp_localize_script as window.sccSettings.debug
+	var debug = window.sccSettings && window.sccSettings.debug;
+
+	/** Internal logger — only outputs when debug mode is on. */
+	SCC.log = function () {
+		if ( ! debug ) return;
+		var args = Array.prototype.slice.call( arguments );
+		args.unshift( '[SCC]' );
+		console.log.apply( console, args );
+	};
+
+	// -------------------------------------------------------------------------
+	// Public API
+	// -------------------------------------------------------------------------
+
 	/**
 	 * Read and parse the consent cookie.
 	 * Returns null if the cookie is absent or malformed.
 	 */
 	SCC.getConsent = function () {
 		var raw = _readCookie( COOKIE_NAME );
-		if ( ! raw ) return null;
+		if ( ! raw ) {
+			SCC.log( 'getConsent: no cookie found' );
+			return null;
+		}
 
 		try {
-			return JSON.parse( decodeURIComponent( raw ) );
+			var parsed = JSON.parse( decodeURIComponent( raw ) );
+			SCC.log( 'getConsent:', parsed );
+			return parsed;
 		} catch ( e ) {
+			SCC.log( 'getConsent: failed to parse cookie', e );
 			return null;
 		}
 	};
@@ -42,7 +66,9 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	 * Returns true if the visitor has already made a choice.
 	 */
 	SCC.hasInteracted = function () {
-		return SCC.getConsent() !== null;
+		var result = SCC.getConsent() !== null;
+		SCC.log( 'hasInteracted:', result );
+		return result;
 	};
 
 	/**
@@ -50,9 +76,14 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	 * 'necessary' is always true.
 	 */
 	SCC.hasConsent = function ( category ) {
-		if ( category === 'necessary' ) return true;
+		if ( category === 'necessary' ) {
+			SCC.log( 'hasConsent: necessary → always true' );
+			return true;
+		}
 		var consent = SCC.getConsent();
-		return consent !== null && consent[ category ] === true;
+		var result  = consent !== null && consent[ category ] === true;
+		SCC.log( 'hasConsent:', category, '→', result );
+		return result;
 	};
 
 	/**
@@ -68,6 +99,7 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 		);
 
 		_writeCookie( COOKIE_NAME, JSON.stringify( consent ), COOKIE_DAYS );
+		SCC.log( 'saveConsent: saved →', consent );
 
 		document.dispatchEvent( new CustomEvent( 'scc:consentUpdated', { detail: consent } ) );
 	};
@@ -76,6 +108,7 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	 * Accept all non-necessary categories.
 	 */
 	SCC.acceptAll = function () {
+		SCC.log( 'acceptAll' );
 		SCC.saveConsent( { analytics: true, marketing: true, functional: true } );
 	};
 
@@ -83,6 +116,7 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	 * Deny all non-necessary categories.
 	 */
 	SCC.denyAll = function () {
+		SCC.log( 'denyAll' );
 		SCC.saveConsent( { analytics: false, marketing: false, functional: false } );
 	};
 
@@ -102,7 +136,7 @@ window.SimpleCookieConsent = window.SimpleCookieConsent || {};
 	}
 
 	function _readCookie( name ) {
-		var nameEQ = name + '=';
+		var nameEQ  = name + '=';
 		var cookies = document.cookie.split( ';' );
 		for ( var i = 0; i < cookies.length; i++ ) {
 			var c = cookies[ i ].trim();

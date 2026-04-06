@@ -13,38 +13,25 @@
  * Domain Path:       /languages
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
 // Plugin constants
-define( 'SCC_VERSION',     '0.1.0' );
-define( 'SCC_PLUGIN_FILE', __FILE__ );
-define( 'SCC_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
-define( 'SCC_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
+define('SCC_VERSION', '0.1.0');
+define('SCC_PLUGIN_FILE', __FILE__);
+define('SCC_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('SCC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Autoload core classes
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-activator.php';
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-deactivator.php';
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-consent-store.php';
+require_once SCC_PLUGIN_DIR . 'public/class-scc-public.php';
 
 // Activation / deactivation hooks
-register_activation_hook( __FILE__,   array( 'SCC_Activator',   'activate' ) );
-register_deactivation_hook( __FILE__, array( 'SCC_Deactivator', 'deactivate' ) );
+register_activation_hook(__FILE__, array('SCC_Activator', 'activate'));
+register_deactivation_hook(__FILE__, array('SCC_Deactivator', 'deactivate'));
 
-// Enqueue frontend consent script
-add_action( 'wp_enqueue_scripts', 'scc_enqueue_public_scripts' );
-
-function scc_enqueue_public_scripts() {
-	if ( ! get_option( 'scc_enabled', '1' ) ) {
-		return;
-	}
-
-	wp_enqueue_script(
-		'scc-consent',
-		SCC_PLUGIN_URL . 'public/assets/scc-consent.js',
-		array(),
-		SCC_VERSION,
-		false // load in <head> — consent must be available as early as possible
-	);
-}
+// Boot frontend
+SCC_Public::init();
