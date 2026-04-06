@@ -47,6 +47,7 @@ class SCC_Activator {
 			'scc_color_bg'           => '#ffffff',
 			'scc_color_text'         => '#111111',
 			'scc_color_accent'       => '#0073aa',
+			'scc_show_preferences_icon' => '1',
 			'scc_gtm_enabled'        => '0',
 			'scc_gtm_mode'           => 'basic',
 			'scc_gtm_wait_for_update'=> '500',

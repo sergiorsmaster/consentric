@@ -48,12 +48,25 @@
 		} );
 	}
 
-	// Preferences button — opens modal (wired in FEAT-07)
+	// Preferences button — opens modal
 	var btnPrefs = document.getElementById( 'scc-preferences' );
 	if ( btnPrefs ) {
 		btnPrefs.addEventListener( 'click', function () {
 			SCC.log( 'Banner: Preferences clicked' );
 			document.dispatchEvent( new CustomEvent( 'scc:openPreferences' ) );
+		} );
+	}
+
+	// Floating preferences icon — show after consent is stored
+	var prefIcon = document.getElementById( 'scc-preferences-icon' );
+	if ( prefIcon ) {
+		if ( SCC.hasInteracted() ) {
+			prefIcon.style.display = '';
+			SCC.log( 'Preferences icon: visible (consent already stored)' );
+		}
+		document.addEventListener( 'scc:consentUpdated', function () {
+			prefIcon.style.display = '';
+			SCC.log( 'Preferences icon: visible after consent update' );
 		} );
 	}
 

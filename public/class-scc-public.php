@@ -10,6 +10,7 @@ class SCC_Public {
 		add_action( 'wp_enqueue_scripts',  array( __CLASS__, 'enqueue_scripts' ) );
 		add_action( 'wp_footer',           array( __CLASS__, 'render_banner' ) );
 		add_action( 'wp_footer',           array( __CLASS__, 'render_modal' ) );
+		add_action( 'wp_footer',           array( __CLASS__, 'render_preferences_icon' ) );
 	}
 
 	/**
@@ -158,6 +159,19 @@ gtag('set', 'url_passthrough', false);
 		$logo_url     = get_option( 'scc_logo_url', '' );
 
 		include SCC_PLUGIN_DIR . 'public/views/banner.php';
+	}
+
+	/**
+	 * Render the floating preferences icon in wp_footer (optional).
+	 */
+	public static function render_preferences_icon() {
+		if ( ! get_option( 'scc_enabled', '1' ) ) {
+			return;
+		}
+		if ( ! get_option( 'scc_show_preferences_icon', '1' ) ) {
+			return;
+		}
+		include SCC_PLUGIN_DIR . 'public/views/preferences-icon.php';
 	}
 
 	/**

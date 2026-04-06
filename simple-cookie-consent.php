@@ -27,11 +27,13 @@ define('SCC_PLUGIN_URL', plugin_dir_url(__FILE__));
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-activator.php';
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-deactivator.php';
 require_once SCC_PLUGIN_DIR . 'includes/class-scc-consent-store.php';
+require_once SCC_PLUGIN_DIR . 'includes/class-scc-shortcodes.php';
 require_once SCC_PLUGIN_DIR . 'public/class-scc-public.php';
 
 // Activation / deactivation hooks
 register_activation_hook(__FILE__, array('SCC_Activator', 'activate'));
 register_deactivation_hook(__FILE__, array('SCC_Deactivator', 'deactivate'));
 
-// Boot frontend
+// Boot frontend and shortcodes
 SCC_Public::init();
+SCC_Shortcodes::init();

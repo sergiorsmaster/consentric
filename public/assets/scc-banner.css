@@ -395,3 +395,41 @@
 	gap:             8px;
 	padding-top:     8px;
 }
+
+/* =============================================================================
+   Floating preferences icon
+   ============================================================================= */
+
+.scc-preferences-icon {
+	position:      fixed;
+	bottom:        20px;
+	left:          20px;
+	z-index:       var(--scc-z);
+	width:         40px;
+	height:        40px;
+	border-radius: 50%;
+	background:    var(--scc-accent);
+	color:         #fff;
+	border:        none;
+	cursor:        pointer;
+	display:       flex;
+	align-items:   center;
+	justify-content: center;
+	box-shadow:    0 2px 8px rgba(0,0,0,.25);
+	transition:    opacity .2s ease, transform .2s ease;
+	padding:       0;
+}
+
+.scc-preferences-icon:hover {
+	opacity:   .9;
+	transform: scale(1.08);
+}
+
+.scc-preferences-icon svg {
+	display: block;
+}
+
+/* Shortcode link — no default styling, inherits theme */
+.scc-preferences-link {
+	cursor: pointer;
+}
