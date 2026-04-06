@@ -259,4 +259,27 @@ $positions = array(
 		</div>
 	</div>
 
+	<hr>
+
+	<!-- =========================================================
+	     Banner Preview
+	     ========================================================= -->
+	<h2 class="scc-section-title"><?php esc_html_e( 'Preview', 'simple-cookie-consent' ); ?></h2>
+
+	<div class="scc-field">
+		<label class="scc-field__label">
+			<?php esc_html_e( 'Preview Banner', 'simple-cookie-consent' ); ?>
+		</label>
+		<div class="scc-field__control">
+			<a href="<?php echo esc_url( add_query_arg( 'scc_preview', '1', home_url( '/' ) ) ); ?>"
+				target="_blank"
+				class="button button-secondary">
+				<?php esc_html_e( 'Open Preview', 'simple-cookie-consent' ); ?>
+			</a>
+			<p class="description">
+				<?php esc_html_e( 'Opens your site homepage in a new tab and forces the cookie banner to appear, even if you have already given consent. This preview is only visible to logged-in administrators — regular visitors are never affected by this URL parameter.', 'simple-cookie-consent' ); ?>
+			</p>
+		</div>
+	</div>
+
 </div>

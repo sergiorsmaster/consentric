@@ -73,9 +73,11 @@ class SCC_Public
 		);
 
 		// Pass settings to JS
+		$is_preview = isset( $_GET['scc_preview'] ) && current_user_can( 'manage_options' );
 		wp_localize_script('scc-consent', 'sccSettings', array(
-			'debug' => (bool) get_option('scc_debug', '0'),
+			'debug'   => (bool) get_option('scc_debug', '0'),
 			'gtmMode' => get_option('scc_gtm_mode', 'basic'),
+			'preview' => $is_preview,
 		));
 
 		// GTM bridge (only when GTM integration is enabled)
@@ -158,7 +160,8 @@ class SCC_Public
 	 */
 	public static function render_banner()
 	{
-		if (!get_option('scc_enabled', '1')) {
+		$is_preview = isset( $_GET['scc_preview'] ) && current_user_can( 'manage_options' );
+		if ( ! $is_preview && ! get_option('scc_enabled', '1') ) {
 			return;
 		}
 

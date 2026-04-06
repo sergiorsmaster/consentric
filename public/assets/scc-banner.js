@@ -18,11 +18,16 @@
 
 	var overlay = document.querySelector( '.scc-banner-overlay' );
 
-	// Show banner (and overlay if present) only if visitor hasn't chosen yet.
-	if ( ! SCC.hasInteracted() ) {
+	// Preview mode: force-show banner even if consent is already stored.
+	// Only active for logged-in admins (gated server-side via sccSettings.preview).
+	var isPreview = ( window.sccSettings && window.sccSettings.preview );
+
+	// Show banner (and overlay if present) only if visitor hasn't chosen yet,
+	// or if preview mode is active.
+	if ( isPreview || ! SCC.hasInteracted() ) {
 		banner.style.display = '';
 		if ( overlay ) overlay.style.display = '';
-		SCC.log( 'Banner: showing (no prior consent)' );
+		SCC.log( isPreview ? 'Banner: showing (preview mode)' : 'Banner: showing (no prior consent)' );
 	} else {
 		SCC.log( 'Banner: hidden (consent already stored)' );
 	}
