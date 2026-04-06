@@ -54,7 +54,7 @@ Tasks are tracked in order below. Status: [ ] pending | [~] in progress | [x] do
 
 ### Phase 6 — Polish & release
 - [ ] FEAT-21: Banner & modal style review (minor visual issues noted during FEAT-09 testing)
-- [ ] FEAT-19: Uninstall cleanup (drop table, delete options)
+- [x] FEAT-19: Uninstall cleanup (drop table, delete options)
 - [ ] FEAT-20: readme.txt for WordPress.org
 
 ## Code conventions
