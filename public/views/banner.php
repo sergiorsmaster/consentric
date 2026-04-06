@@ -1,0 +1,94 @@
+<?php
+/**
+ * Cookie consent banner template.
+ *
+ * Variables available (set by SCC_Public::render_banner()):
+ *   $position     string  e.g. 'bottom-bar'
+ *   $jurisdiction string  'gdpr' | 'lgpd' | 'ccpa'
+ *   $title        string
+ *   $text         string
+ *   $logo_url     string  (may be empty)
+ *   $accept_label string
+ *   $deny_label   string
+ *   $prefs_label  string
+ *   $privacy_url  string  (may be empty)
+ *   $cookie_url   string  (may be empty)
+ *   $imprint_url  string  (may be empty)
+ *   $ccpa_text    string
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
+<div id="scc-banner"
+	class="scc-banner scc-position-<?php echo esc_attr( $position ); ?>"
+	role="dialog"
+	aria-modal="true"
+	aria-labelledby="scc-banner-title"
+	style="display:none">
+
+	<div class="scc-banner__inner">
+
+		<?php if ( ! empty( $logo_url ) ) : ?>
+			<div class="scc-banner__logo">
+				<img src="<?php echo esc_url( $logo_url ); ?>" alt="" aria-hidden="true">
+			</div>
+		<?php endif; ?>
+
+		<div class="scc-banner__content">
+			<p class="scc-banner__title" id="scc-banner-title">
+				<?php echo esc_html( $title ); ?>
+			</p>
+			<p class="scc-banner__text">
+				<?php echo esc_html( $text ); ?>
+			</p>
+		</div>
+
+		<?php if ( 'ccpa' === $jurisdiction ) : ?>
+
+			<div class="scc-banner__actions">
+				<button class="scc-btn scc-btn--deny" id="scc-deny">
+					<?php echo esc_html( $ccpa_text ); ?>
+				</button>
+				<button class="scc-btn scc-btn--accept" id="scc-accept">
+					<?php echo esc_html( $accept_label ); ?>
+				</button>
+			</div>
+
+		<?php else : ?>
+
+			<div class="scc-banner__actions">
+				<button class="scc-btn scc-btn--deny" id="scc-deny">
+					<?php echo esc_html( $deny_label ); ?>
+				</button>
+				<button class="scc-btn scc-btn--preferences" id="scc-preferences">
+					<?php echo esc_html( $prefs_label ); ?>
+				</button>
+				<button class="scc-btn scc-btn--accept" id="scc-accept">
+					<?php echo esc_html( $accept_label ); ?>
+				</button>
+			</div>
+
+		<?php endif; ?>
+
+		<?php
+		$links = array();
+		if ( ! empty( $privacy_url ) ) {
+			$links[] = '<a href="' . esc_url( $privacy_url ) . '">' . esc_html__( 'Privacy Policy', 'simple-cookie-consent' ) . '</a>';
+		}
+		if ( ! empty( $cookie_url ) ) {
+			$links[] = '<a href="' . esc_url( $cookie_url ) . '">' . esc_html__( 'Cookie Policy', 'simple-cookie-consent' ) . '</a>';
+		}
+		if ( ! empty( $imprint_url ) ) {
+			$links[] = '<a href="' . esc_url( $imprint_url ) . '">' . esc_html__( 'Imprint', 'simple-cookie-consent' ) . '</a>';
+		}
+		if ( ! empty( $links ) ) :
+		?>
+			<div class="scc-banner__links">
+				<?php echo implode( ' · ', $links ); ?>
+			</div>
+		<?php endif; ?>
+
+	</div>
+</div>

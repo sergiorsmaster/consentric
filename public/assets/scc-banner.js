@@ -1,0 +1,60 @@
+/**
+ * SCC Banner — show/hide logic
+ *
+ * Reads the consent cookie on page load and decides whether to show the banner.
+ * Wires Accept / Deny buttons to SCC_Consent_Store helpers.
+ * The Preferences button is wired in FEAT-07 (preferences modal).
+ */
+
+(function () {
+
+	'use strict';
+
+	var SCC = window.SimpleCookieConsent;
+	if ( ! SCC ) return;
+
+	var banner = document.getElementById( 'scc-banner' );
+	if ( ! banner ) return;
+
+	// Show banner only if the visitor has not yet made a choice.
+	if ( ! SCC.hasInteracted() ) {
+		banner.style.display = '';
+		SCC.log( 'Banner: showing (no prior consent)' );
+	} else {
+		SCC.log( 'Banner: hidden (consent already stored)' );
+	}
+
+	// Hide banner whenever consent is saved (accept, deny, or preferences).
+	document.addEventListener( 'scc:consentUpdated', function () {
+		banner.style.display = 'none';
+		SCC.log( 'Banner: hidden after consent update' );
+	} );
+
+	// Accept All button
+	var btnAccept = document.getElementById( 'scc-accept' );
+	if ( btnAccept ) {
+		btnAccept.addEventListener( 'click', function () {
+			SCC.log( 'Banner: Accept All clicked' );
+			SCC.acceptAll();
+		} );
+	}
+
+	// Deny All button
+	var btnDeny = document.getElementById( 'scc-deny' );
+	if ( btnDeny ) {
+		btnDeny.addEventListener( 'click', function () {
+			SCC.log( 'Banner: Deny All clicked' );
+			SCC.denyAll();
+		} );
+	}
+
+	// Preferences button — opens modal (wired in FEAT-07)
+	var btnPrefs = document.getElementById( 'scc-preferences' );
+	if ( btnPrefs ) {
+		btnPrefs.addEventListener( 'click', function () {
+			SCC.log( 'Banner: Preferences clicked' );
+			document.dispatchEvent( new CustomEvent( 'scc:openPreferences' ) );
+		} );
+	}
+
+} )();

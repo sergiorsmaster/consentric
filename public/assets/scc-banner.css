@@ -1,0 +1,229 @@
+/* =============================================================================
+   SCC Banner — CSS
+   Colors are injected as CSS custom properties by PHP (wp_add_inline_style).
+   ============================================================================= */
+
+:root {
+	--scc-bg:        #ffffff;
+	--scc-text:      #111111;
+	--scc-accent:    #0073aa;
+	--scc-radius:    6px;
+	--scc-shadow:    0 2px 16px rgba(0, 0, 0, .15);
+	--scc-z:         99999;
+	--scc-font:      inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   Base banner
+   ----------------------------------------------------------------------------- */
+
+.scc-banner {
+	position:        fixed;
+	z-index:         var(--scc-z);
+	background:      var(--scc-bg);
+	color:           var(--scc-text);
+	font-family:     var(--scc-font);
+	font-size:       14px;
+	line-height:     1.5;
+	box-shadow:      var(--scc-shadow);
+	box-sizing:      border-box;
+}
+
+.scc-banner__inner {
+	display:         flex;
+	flex-wrap:       wrap;
+	align-items:     center;
+	gap:             12px;
+	padding:         16px 20px;
+	max-width:       1200px;
+	margin:          0 auto;
+	box-sizing:      border-box;
+}
+
+/* -----------------------------------------------------------------------------
+   Positions
+   ----------------------------------------------------------------------------- */
+
+/* Full-width bars */
+.scc-position-bottom-bar {
+	bottom: 0;
+	left:   0;
+	right:  0;
+}
+
+.scc-position-top-bar {
+	top:   0;
+	left:  0;
+	right: 0;
+}
+
+/* Corner boxes */
+.scc-position-bottom-left,
+.scc-position-bottom-right {
+	bottom:        20px;
+	width:         360px;
+	max-width:     calc(100vw - 40px);
+	border-radius: var(--scc-radius);
+}
+
+.scc-position-bottom-left  { left:  20px; }
+.scc-position-bottom-right { right: 20px; }
+
+/* Corner boxes stack content vertically */
+.scc-position-bottom-left  .scc-banner__inner,
+.scc-position-bottom-right .scc-banner__inner {
+	flex-direction: column;
+	align-items:    flex-start;
+}
+
+/* Center modal */
+.scc-position-center-modal {
+	top:           50%;
+	left:          50%;
+	transform:     translate(-50%, -50%);
+	width:         480px;
+	max-width:     calc(100vw - 40px);
+	border-radius: var(--scc-radius);
+}
+
+.scc-position-center-modal .scc-banner__inner {
+	flex-direction: column;
+	align-items:    flex-start;
+}
+
+/* Overlay backdrop for center modal */
+.scc-position-center-modal::before {
+	content:    '';
+	position:   fixed;
+	inset:      0;
+	background: rgba(0, 0, 0, .4);
+	z-index:    -1;
+}
+
+/* -----------------------------------------------------------------------------
+   Logo
+   ----------------------------------------------------------------------------- */
+
+.scc-banner__logo img {
+	max-height: 40px;
+	width:      auto;
+	display:    block;
+}
+
+/* -----------------------------------------------------------------------------
+   Content
+   ----------------------------------------------------------------------------- */
+
+.scc-banner__content {
+	flex: 1 1 260px;
+}
+
+.scc-banner__title {
+	margin:      0 0 4px;
+	font-weight: 600;
+	font-size:   15px;
+	color:       var(--scc-text);
+}
+
+.scc-banner__text {
+	margin: 0;
+	color:  var(--scc-text);
+}
+
+/* -----------------------------------------------------------------------------
+   Buttons
+   ----------------------------------------------------------------------------- */
+
+.scc-banner__actions {
+	display:     flex;
+	flex-wrap:   wrap;
+	gap:         8px;
+	flex-shrink: 0;
+}
+
+.scc-btn {
+	display:       inline-block;
+	padding:       8px 16px;
+	border-radius: var(--scc-radius);
+	font-size:     13px;
+	font-weight:   600;
+	cursor:        pointer;
+	border:        2px solid transparent;
+	line-height:   1.4;
+	white-space:   nowrap;
+	transition:    opacity .15s ease;
+}
+
+.scc-btn:hover {
+	opacity: .85;
+}
+
+.scc-btn--accept {
+	background:   var(--scc-accent);
+	color:        #fff;
+	border-color: var(--scc-accent);
+}
+
+.scc-btn--deny {
+	background:   transparent;
+	color:        var(--scc-text);
+	border-color: currentColor;
+}
+
+.scc-btn--preferences {
+	background:   transparent;
+	color:        var(--scc-text);
+	border-color: transparent;
+	text-decoration: underline;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+/* -----------------------------------------------------------------------------
+   Legal links
+   ----------------------------------------------------------------------------- */
+
+.scc-banner__links {
+	width:     100%;
+	font-size: 12px;
+	opacity:   .7;
+}
+
+.scc-banner__links a {
+	color:           var(--scc-text);
+	text-decoration: underline;
+}
+
+.scc-banner__links a:hover {
+	opacity: .75;
+}
+
+/* -----------------------------------------------------------------------------
+   Responsive — stack everything on small screens
+   ----------------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+	.scc-banner__inner {
+		flex-direction: column;
+		align-items:    flex-start;
+	}
+
+	.scc-banner__actions {
+		width: 100%;
+	}
+
+	.scc-btn {
+		flex: 1 1 auto;
+		text-align: center;
+	}
+
+	.scc-position-bottom-left,
+	.scc-position-bottom-right {
+		left:   0;
+		right:  0;
+		bottom: 0;
+		width:  100%;
+		max-width: 100%;
+		border-radius: 0;
+	}
+}

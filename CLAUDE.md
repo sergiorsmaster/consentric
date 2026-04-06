@@ -32,7 +32,7 @@ Tasks are tracked in order below. Status: [ ] pending | [~] in progress | [x] do
 - [x] FEAT-05: GTM Advanced mode support
 
 ### Phase 2 — Banner UI
-- [ ] FEAT-06: Banner HTML template + CSS (position, colors, responsive)
+- [x] FEAT-06: Banner HTML template + CSS (position, colors, responsive)
 - [ ] FEAT-07: Accept All / Deny All / Preferences modal
 - [ ] FEAT-08: Re-open preferences via footer link
 
