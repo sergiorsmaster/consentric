@@ -24,7 +24,7 @@ Use these when the PO makes the corresponding request:
 | `/translate` | New strings were added; translations need updating |
 | `/add-setting option_name tab field_type` | PO asks to add a new admin settings field |
 
-Skills are defined in `.claude/commands/` — read the relevant file for the full step-by-step procedure.
+Skills are defined in `.claude/skills/` — read the relevant `SKILL.md` for the full step-by-step procedure.
 
 ---
 
@@ -58,7 +58,7 @@ simple-cookie-consent/
 ├── readme.txt                  ← WordPress.org listing
 ├── .github/workflows/
 │   └── release.yml             ← Auto-build zip + GitHub Release on vX.X.X tag push
-├── .claude/commands/           ← AI slash commands (skills)
+├── .claude/skills/             ← AI slash commands (skills)
 ├── includes/
 │   ├── class-scc-activator.php     ← create_tables(), set_defaults(), seed_own_cookie()
 │   ├── class-scc-deactivator.php

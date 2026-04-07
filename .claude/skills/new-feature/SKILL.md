@@ -1,3 +1,10 @@
+---
+name: new-feature
+description: Start a new feature following the FEAT-XX branch workflow. Use when the PO asks to implement a new feature. Presents scope and waits for approval before writing any code.
+argument-hint: "<FEAT-XX> <short description> (e.g. FEAT-32 Script Manager)"
+allowed-tools: Bash Read Edit Write Glob Grep
+---
+
 # Start a new feature for Simple Cookie Consent
 
 The user wants to implement a new feature. Arguments: **$ARGUMENTS**

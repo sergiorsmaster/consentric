@@ -1,3 +1,10 @@
+---
+name: add-setting
+description: Add a new WordPress admin settings field following the plugin's conventions. Covers registration, sanitization, default value, tab view HTML, frontend usage, and uninstall cleanup.
+argument-hint: "<option_name> <tab> <field_type> (e.g. scc_my_option general text)"
+allowed-tools: Bash Read Edit Write Glob Grep
+---
+
 # Add a new WordPress settings field
 
 The user wants to add a new admin settings field. Details: **$ARGUMENTS**

@@ -1,3 +1,10 @@
+---
+name: release
+description: Cut a new versioned release of Simple Cookie Consent. Use when the PO asks to release a new version (e.g. "release 1.2.0").
+argument-hint: "<version> (e.g. 1.2.0)"
+allowed-tools: Bash Read Edit Glob Grep
+---
+
 # Release a new version of Simple Cookie Consent
 
 The user has requested a new release. The target version is: **$ARGUMENTS**

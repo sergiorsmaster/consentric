@@ -1,3 +1,9 @@
+---
+name: translate
+description: Regenerate the POT template and compile all MO translation files. Use whenever new translatable strings are added to the plugin.
+allowed-tools: Bash Read Edit Glob Grep
+---
+
 # Update translations for Simple Cookie Consent
 
 Regenerate the POT template and compile all MO files.
