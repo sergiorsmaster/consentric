@@ -80,6 +80,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<hr>
 
+	<!-- Preferences dialog text -->
+	<h2 class="scc-section-title"><?php esc_html_e( 'Preferences Dialog', 'simple-cookie-consent' ); ?></h2>
+
+	<div class="scc-field">
+		<label class="scc-field__label" for="scc_modal_title">
+			<?php esc_html_e( 'Dialog Title', 'simple-cookie-consent' ); ?>
+		</label>
+		<div class="scc-field__control">
+			<input type="text" id="scc_modal_title" name="scc_modal_title" class="regular-text"
+				value="<?php echo esc_attr( get_option( 'scc_modal_title', __( 'Cookie Preferences', 'simple-cookie-consent' ) ) ); ?>">
+		</div>
+	</div>
+
+	<div class="scc-field">
+		<label class="scc-field__label" for="scc_modal_intro">
+			<?php esc_html_e( 'Dialog Description', 'simple-cookie-consent' ); ?>
+		</label>
+		<div class="scc-field__control">
+			<textarea id="scc_modal_intro" name="scc_modal_intro" class="large-text" rows="2"><?php
+				echo esc_textarea( get_option( 'scc_modal_intro', __( 'Choose which cookies you allow. You can change your preferences at any time.', 'simple-cookie-consent' ) ) );
+			?></textarea>
+		</div>
+	</div>
+
+	<div class="scc-field">
+		<label class="scc-field__label" for="scc_modal_save_label">
+			<?php esc_html_e( 'Save Button Label', 'simple-cookie-consent' ); ?>
+		</label>
+		<div class="scc-field__control">
+			<input type="text" id="scc_modal_save_label" name="scc_modal_save_label" class="regular-text"
+				value="<?php echo esc_attr( get_option( 'scc_modal_save_label', __( 'Save Preferences', 'simple-cookie-consent' ) ) ); ?>">
+		</div>
+	</div>
+
+	<div class="scc-field">
+		<label class="scc-field__label" for="scc_modal_deny_label">
+			<?php esc_html_e( 'Deny Button Label', 'simple-cookie-consent' ); ?>
+		</label>
+		<div class="scc-field__control">
+			<input type="text" id="scc_modal_deny_label" name="scc_modal_deny_label" class="regular-text"
+				value="<?php echo esc_attr( get_option( 'scc_modal_deny_label', __( 'Deny All', 'simple-cookie-consent' ) ) ); ?>">
+		</div>
+	</div>
+
+	<hr>
+
 	<!-- Legal pages -->
 	<div class="scc-field">
 		<label class="scc-field__label" for="scc_privacy_policy_page">

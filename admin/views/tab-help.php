@@ -29,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr><td><code>.scc-banner__links a</code></td><td><?php esc_html_e( 'Legal page links (Privacy Policy, Cookie Policy, Imprint)', 'simple-cookie-consent' ); ?></td></tr>
 			<tr><td><code>.scc-modal__box</code></td><td><?php esc_html_e( 'Preferences modal container', 'simple-cookie-consent' ); ?></td></tr>
 			<tr><td><code>.scc-preferences-icon</code></td><td><?php esc_html_e( 'Floating cookie icon button', 'simple-cookie-consent' ); ?></td></tr>
+			<tr><td><code>.scc-banner-overlay</code></td><td><?php esc_html_e( 'Full-screen backdrop shown behind the center-modal banner position', 'simple-cookie-consent' ); ?></td></tr>
 		</tbody>
 	</table>
 
@@ -134,6 +135,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tr>
 				<td><code>SimpleCookieConsent.saveConsent( categories )</code></td>
 				<td><?php esc_html_e( 'Save a partial consent object. Example:', 'simple-cookie-consent' ); ?> <code>{ analytics: true, marketing: false }</code></td>
+			</tr>
+			<tr>
+				<td><code>SimpleCookieConsent.openBanner()</code></td>
+				<td><?php esc_html_e( 'Programmatically show the consent banner (e.g. from a "Review cookie settings" link).', 'simple-cookie-consent' ); ?></td>
 			</tr>
 			<tr>
 				<td><code>SimpleCookieConsent.openPreferences()</code></td>

@@ -3,9 +3,13 @@
  * Cookie preferences modal template.
  *
  * Variables available (set by SCC_Public::render_modal()):
- *   $jurisdiction string  'gdpr' | 'lgpd' | 'ccpa'
- *   $privacy_url  string  (may be empty)
- *   $cookie_url   string  (may be empty)
+ *   $jurisdiction     string  'gdpr' | 'lgpd' | 'ccpa'
+ *   $privacy_url      string  (may be empty)
+ *   $cookie_url       string  (may be empty)
+ *   $modal_title      string
+ *   $modal_intro      string
+ *   $modal_save_label string
+ *   $modal_deny_label string
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,11 +32,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</button>
 
 		<h2 class="scc-modal__title" id="scc-modal-title">
-			<?php esc_html_e( 'Cookie Preferences', 'simple-cookie-consent' ); ?>
+			<?php echo esc_html( $modal_title ); ?>
 		</h2>
 
 		<p class="scc-modal__intro">
-			<?php esc_html_e( 'Choose which cookies you allow. You can change your preferences at any time.', 'simple-cookie-consent' ); ?>
+			<?php echo esc_html( $modal_intro ); ?>
 		</p>
 
 		<div class="scc-modal__categories">
@@ -97,10 +101,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="scc-modal__footer">
 			<button class="scc-btn scc-btn--deny" id="scc-modal-deny">
-				<?php esc_html_e( 'Deny All', 'simple-cookie-consent' ); ?>
+				<?php echo esc_html( $modal_deny_label ); ?>
 			</button>
 			<button class="scc-btn scc-btn--accept" id="scc-modal-save">
-				<?php esc_html_e( 'Save Preferences', 'simple-cookie-consent' ); ?>
+				<?php echo esc_html( $modal_save_label ); ?>
 			</button>
 		</div>
 
