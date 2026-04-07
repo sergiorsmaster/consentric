@@ -221,9 +221,14 @@ class SCC_Public
 
 		$jurisdiction = get_option('scc_jurisdiction', 'gdpr');
 		$privacy_page = (int) get_option('scc_privacy_policy_page', 0);
-		$cookie_page = (int) get_option('scc_cookie_policy_page', 0);
-		$privacy_url = $privacy_page ? get_permalink($privacy_page) : '';
-		$cookie_url = $cookie_page ? get_permalink($cookie_page) : '';
+		$cookie_page  = (int) get_option('scc_cookie_policy_page', 0);
+		$privacy_url  = $privacy_page ? get_permalink($privacy_page) : '';
+		$cookie_url   = $cookie_page ? get_permalink($cookie_page) : '';
+
+		$modal_title      = SCC_Polylang::translate( 'scc_modal_title',      __( 'Cookie Preferences', 'simple-cookie-consent' ) );
+		$modal_intro      = SCC_Polylang::translate( 'scc_modal_intro',      __( 'Choose which cookies you allow. You can change your preferences at any time.', 'simple-cookie-consent' ) );
+		$modal_save_label = SCC_Polylang::translate( 'scc_modal_save_label', __( 'Save Preferences', 'simple-cookie-consent' ) );
+		$modal_deny_label = SCC_Polylang::translate( 'scc_modal_deny_label', __( 'Deny All', 'simple-cookie-consent' ) );
 
 		include SCC_PLUGIN_DIR . 'public/views/modal.php';
 	}

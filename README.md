@@ -170,6 +170,7 @@ All methods are available on `window.SimpleCookieConsent`:
 | `acceptAll()` | Grant consent for all categories |
 | `denyAll()` | Deny all non-necessary categories |
 | `saveConsent( categories )` | Save partial consent — e.g. `{ analytics: true, marketing: false }` |
+| `openBanner()` | Programmatically show the consent banner |
 | `openPreferences()` | Programmatically open the preferences modal |
 | `hasConsent( category )` | Returns `true` if consent granted for the given category |
 | `hasInteracted()` | Returns `true` if the visitor has made a consent choice |

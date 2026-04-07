@@ -65,17 +65,21 @@
 		if ( overlay ) overlay.style.display = '';
 		SCC.log( isPreview ? 'Banner: showing (preview mode)' : 'Banner: showing (no prior consent)' );
 
-		// Move focus into the banner: for center-modal focus the dialog itself,
-		// for bars focus the first button so keyboard users can act immediately.
-		if ( isModal ) {
-			banner.focus();
-		} else {
-			var firstBtn = banner.querySelector( 'button' );
-			if ( firstBtn ) firstBtn.focus();
-		}
+		// Move focus to the banner dialog container for all positions.
+		// Buttons remain reachable via Tab; this avoids stealing focus from the
+		// page itself on load while still satisfying the dialog role contract.
+		banner.focus();
 	} else {
 		SCC.log( 'Banner: hidden (consent already stored)' );
 	}
+
+	// Expose openBanner() on the public API so it can be called from JS at any time.
+	SCC.openBanner = function () {
+		banner.style.display = '';
+		if ( overlay ) overlay.style.display = '';
+		banner.focus();
+		SCC.log( 'Banner: opened via API' );
+	};
 
 	// Hide banner + overlay whenever consent is saved.
 	document.addEventListener( 'scc:consentUpdated', function () {

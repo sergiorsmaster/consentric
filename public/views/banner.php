@@ -62,14 +62,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php else : ?>
 
 			<div class="scc-banner__actions">
+				<button class="scc-btn scc-btn--accept" id="scc-accept">
+					<?php echo esc_html( $accept_label ); ?>
+				</button>
 				<button class="scc-btn scc-btn--deny" id="scc-deny">
 					<?php echo esc_html( $deny_label ); ?>
 				</button>
 				<button class="scc-btn scc-btn--preferences" id="scc-preferences">
 					<?php echo esc_html( $prefs_label ); ?>
-				</button>
-				<button class="scc-btn scc-btn--accept" id="scc-accept">
-					<?php echo esc_html( $accept_label ); ?>
 				</button>
 			</div>
 
