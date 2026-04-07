@@ -69,6 +69,50 @@ Tasks are tracked in order below. Status: [ ] pending | [~] in progress | [x] do
 - [x] FEAT-30: UX improvements — focus, button order, modal text, openBanner()
 - [x] FEAT-31: i18n — PT and DE translations, POT file, load_plugin_textdomain()
 
+## Release process
+
+### How WordPress identifies the plugin version
+
+WordPress reads the version from **two places** that must always be in sync:
+
+1. **Plugin header** — `simple-cookie-consent.php`, line `Version: X.X.X`
+2. **PHP constant** — `simple-cookie-consent.php`, line `define('SCC_VERSION', 'X.X.X')`
+
+The `readme.txt` field `Stable tag: X.X.X` is only relevant if/when the plugin is submitted to WordPress.org.
+
+### Steps to release a new version
+
+When the PO asks for a new release (e.g. "release v1.2.0"), the AI must:
+
+1. **Create a release branch** — `git checkout -b release/vX.X.X`
+2. **Bump the version** in `simple-cookie-consent.php`:
+   - `Version: X.X.X` (plugin header comment)
+   - `define('SCC_VERSION', 'X.X.X')` (constant, same file)
+3. **Bump `Stable tag`** in `readme.txt` to match.
+4. **Commit** — message: `chore: bump version to X.X.X`
+5. **Merge to `main`** — merge the release branch into `main`.
+6. **Tag and push** — creates the GitHub Release automatically:
+   ```bash
+   git tag vX.X.X
+   git push origin vX.X.X
+   ```
+
+### What happens automatically (GitHub Actions)
+
+The `.github/workflows/release.yml` workflow triggers on `vX.X.X` tags and:
+- **Validates** the tag version matches the `Version:` header — fails loudly if they don't match.
+- Builds a clean zip (`simple-cookie-consent-X.X.X.zip`) excluding dev files.
+- Creates a GitHub Release with the zip attached and auto-generated release notes.
+
+### Version format
+
+Follow [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`
+- `PATCH` — bug fixes, copy changes, minor tweaks
+- `MINOR` — new features, backwards-compatible
+- `MAJOR` — breaking changes or major rewrites
+
+---
+
 ## Code conventions
 
 - PHP prefix: `scc_` on all functions, classes, hooks, options.
