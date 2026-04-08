@@ -344,14 +344,14 @@
 
 .scc-modal__title {
 	margin: 0 0 8px;
-	font-size: 18px;
+	font-size: 1.2rem;
 	font-weight: 600;
 	color: var(--scc-text);
 }
 
 .scc-modal__intro {
 	margin: 0 0 20px;
-	font-size: 13px;
+	font-size: 0.9rem;
 	opacity: .8;
 }
 
@@ -367,7 +367,7 @@
 }
 
 .scc-modal__category {
-	padding: 14px 0;
+	padding: 0.9rem 0;
 	border-bottom: 1px solid rgba(0, 0, 0, .08);
 }
 
@@ -379,22 +379,22 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 6px;
+	margin-bottom: 0.5rem;
 }
 
 .scc-modal__category-name {
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 1rem;
 }
 
 .scc-modal__category-desc {
 	margin: 0;
-	font-size: 13px;
+	font-size: 0.9rem;
 	opacity: .75;
 }
 
 .scc-modal__always-on {
-	font-size: 12px;
+	font-size: 0.8rem;
 	font-weight: 600;
 	color: var(--scc-accent);
 }
