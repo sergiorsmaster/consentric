@@ -15,14 +15,23 @@ class SCC_Admin {
 		'help'         => null, // no settings group — documentation only
 	);
 
-	const TAB_LABELS = array(
-		'general'      => 'General',
-		'appearance'   => 'Appearance',
-		'jurisdiction' => 'Jurisdiction',
-		'integrations' => 'Integrations',
-		'cookies'      => 'Cookies',
-		'help'         => 'Help',
-	);
+	/**
+	 * Return translatable tab labels.
+	 *
+	 * Cannot use a const because __() is a function call.
+	 *
+	 * @return array<string,string>
+	 */
+	public static function get_tab_labels() {
+		return array(
+			'general'      => __( 'General', 'simple-cookie-consent' ),
+			'appearance'   => __( 'Appearance', 'simple-cookie-consent' ),
+			'jurisdiction' => __( 'Jurisdiction', 'simple-cookie-consent' ),
+			'integrations' => __( 'Integrations', 'simple-cookie-consent' ),
+			'cookies'      => __( 'Cookies', 'simple-cookie-consent' ),
+			'help'         => __( 'Help', 'simple-cookie-consent' ),
+		);
+	}
 
 	public static function init() {
 		add_action( 'admin_menu',            array( __CLASS__, 'add_menu' ) );
@@ -267,7 +276,7 @@ class SCC_Admin {
 			<h1><?php esc_html_e( 'Cookie Consent Settings', 'simple-cookie-consent' ); ?></h1>
 
 			<nav class="nav-tab-wrapper">
-				<?php foreach ( self::TAB_LABELS as $slug => $label ) : ?>
+				<?php foreach ( self::get_tab_labels() as $slug => $label ) : ?>
 					<a href="<?php echo esc_url( admin_url( 'options-general.php?page=scc-cookie-consent&tab=' . $slug ) ); ?>"
 					   class="nav-tab <?php echo $active_tab === $slug ? 'nav-tab-active' : ''; ?>">
 						<?php echo esc_html( $label ); ?>

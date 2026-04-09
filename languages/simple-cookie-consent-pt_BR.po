@@ -1,9 +1,9 @@
-# Portuguese (Brazil) translation for Simple Cookie Consent
+# Portuguese (Brazil) translation for Open Cookie Consent
 # Copyright (C) 2026 Sergio Ricardo
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Simple Cookie Consent 0.1.0\n"
+"Project-Id-Version: Open Cookie Consent 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/simple-cookie-consent\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Sergio Ricardo\n"
@@ -16,8 +16,8 @@ msgstr ""
 "X-Domain: simple-cookie-consent\n"
 
 #. Plugin Name of the plugin
-msgid "Simple Cookie Consent"
-msgstr "Simple Cookie Consent"
+msgid "Open Cookie Consent"
+msgstr "Open Cookie Consent"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/sergiorsmaster/simple-wp-cookie-consent"
@@ -30,6 +30,25 @@ msgstr "Um banner de consentimento de cookies simples, gratuito e de código abe
 #. Author of the plugin
 msgid "Sergio Ricardo"
 msgstr "Sergio Ricardo"
+
+#. Admin tab labels
+msgid "General"
+msgstr "Geral"
+
+msgid "Appearance"
+msgstr "Aparência"
+
+msgid "Jurisdiction"
+msgstr "Jurisdição"
+
+msgid "Integrations"
+msgstr "Integrações"
+
+msgid "Cookies"
+msgstr "Cookies"
+
+msgid "Help"
+msgstr "Ajuda"
 
 msgid "We use cookies"
 msgstr "Usamos cookies"

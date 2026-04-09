@@ -1,4 +1,4 @@
-# Simple Cookie Consent — CLAUDE.md
+# Open Cookie Consent — CLAUDE.md
 
 ## Working Agreement
 

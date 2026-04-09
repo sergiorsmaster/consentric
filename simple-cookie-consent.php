@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Simple Cookie Consent
+ * Plugin Name:       Open Cookie Consent
  * Plugin URI:        https://github.com/sergiorsmaster/simple-wp-cookie-consent
  * Description:       A simple, free, and open-source cookie consent banner. No hidden Pro features, no subscription.
  * Version:           0.3.1

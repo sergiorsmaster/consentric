@@ -1,4 +1,4 @@
-=== Simple Cookie Consent ===
+=== Open Cookie Consent ===
 Contributors: sergiorsmaster
 Tags: cookie consent, GDPR, CCPA, cookie banner, consent mode
 Requires at least: 6.0
@@ -18,7 +18,7 @@ After years of building websites and constantly searching for a cookie consent s
 
 ---
 
-### What makes Simple Cookie Consent different?
+### What makes Open Cookie Consent different?
 
 Most free cookie consent plugins give you a basic banner and then ask you to upgrade for anything that actually matters — GTM Consent Mode v2, a cookie scanner, jurisdiction settings, custom branding. Here, **all of that is included at no cost**, forever.
 
@@ -151,5 +151,5 @@ Add `[scc_cookie_list]` to any page. Use the optional `categories` attribute to 
 
 == Upgrade Notice ==
 
-= 0.1.0 =
+= 0.3.2 =
 Initial release.

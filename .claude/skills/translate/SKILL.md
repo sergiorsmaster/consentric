@@ -4,7 +4,7 @@ description: Regenerate the POT template and compile all MO translation files. U
 allowed-tools: Bash Read Edit Glob Grep
 ---
 
-# Update translations for Simple Cookie Consent
+# Update translations for Open Cookie Consent
 
 Regenerate the POT template and compile all MO files.
 Run this skill whenever new translatable strings are added to the plugin.

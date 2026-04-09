@@ -64,7 +64,7 @@ class SCC_Activator {
 			array(
 				'cookie_name' => 'scc_consent',
 				'category'    => 'necessary',
-				'service'     => 'Simple Cookie Consent',
+				'service'     => 'Open Cookie Consent',
 				'duration'    => '1 year',
 				'description' => 'Stores the visitor\'s cookie consent preferences (categories granted/denied, timestamp, version). Set by this plugin.',
 				'source'      => 'manual',

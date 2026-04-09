@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Simple Cookie Consent 0.1.0\n"
+"Project-Id-Version: Open Cookie Consent 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/simple-cookie-consent\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: simple-cookie-consent.php
-msgid "Simple Cookie Consent"
+msgid "Open Cookie Consent"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -32,6 +32,31 @@ msgstr ""
 #. Author of the plugin
 #: simple-cookie-consent.php
 msgid "Sergio Ricardo"
+msgstr ""
+
+#. Admin tab labels
+#: admin/class-scc-admin.php
+msgid "General"
+msgstr ""
+
+#: admin/class-scc-admin.php
+msgid "Appearance"
+msgstr ""
+
+#: admin/class-scc-admin.php
+msgid "Jurisdiction"
+msgstr ""
+
+#: admin/class-scc-admin.php
+msgid "Integrations"
+msgstr ""
+
+#: admin/class-scc-admin.php
+msgid "Cookies"
+msgstr ""
+
+#: admin/class-scc-admin.php
+msgid "Help"
 msgstr ""
 
 #: admin/class-scc-admin.php:136
