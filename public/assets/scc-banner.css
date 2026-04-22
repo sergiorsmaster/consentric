@@ -329,33 +329,35 @@
 	position: absolute;
 	top: 12px;
 	right: 14px;
-	background: transparent;
-	border: 2px solid transparent;
+	background: transparent !important;
+	border: var(--scc-btn-border-width) solid var(--scc-secondary-border) !important;
 	border-radius: var(--scc-radius);
 	font-size: 18px;
+	font-weight: 600;
 	cursor: pointer;
-	color: var(--scc-text);
-	opacity: .6;
+	color: var(--scc-text) !important;
 	line-height: 1;
-	padding: 4px;
-	box-shadow: none;
+	padding: 4px 8px;
+	box-shadow: none !important;
 	outline: none;
+	text-decoration: none;
+	transition: background-color .15s ease, color .15s ease, opacity .15s ease;
 }
 
 .scc-modal__close:focus,
 .scc-modal__close:focus-visible {
-	background: transparent;
-	border-color: transparent;
-	box-shadow: none;
+	background: transparent !important;
+	color: var(--scc-text) !important;
+	border-color: var(--scc-secondary-border) !important;
+	box-shadow: none !important;
 	outline: none;
-	opacity: .8;
 }
 
 .scc-modal__close:hover {
+	background: rgba(0, 0, 0, .05) !important;
+	color: var(--scc-text) !important;
+	border-color: var(--scc-secondary-border) !important;
 	opacity: 1;
-	background: var(--scc-accent);
-	color: #fff;
-	border-color: transparent;
 }
 
 .scc-modal__title {
@@ -490,22 +492,28 @@
 	z-index: var(--scc-z);
 	width: 40px;
 	height: 40px;
-	border-radius: 50%;
-	background: var(--scc-accent);
-	color: #fff;
-	border: none;
+	border-radius: 50% !important;
+	background: var(--scc-accent) !important;
+	color: #fff !important;
+	border: none !important;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .25) !important;
 	transition: opacity .2s ease, transform .2s ease;
 	padding: 0;
+	outline: none;
 }
 
-.scc-preferences-icon:hover {
+.scc-preferences-icon:hover,
+.scc-preferences-icon:focus {
 	opacity: .9;
 	transform: scale(1.08);
+	background: var(--scc-accent) !important;
+	color: #fff !important;
+	border: none !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .25) !important;
 }
 
 .scc-preferences-icon svg {
