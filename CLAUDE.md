@@ -30,7 +30,7 @@ Skills are defined in `.claude/skills/` — read the relevant `SKILL.md` for the
 
 ## Plugin Identity
 
-- **Display name:** Consentric — Truly Free Cookie Consent
+- **Display name:** Consentric — Simple Cookie Consent
 - **WP.org slug:** `consentric`
 - **Slug (files):** `consentric`
 - **Main file:** `consentric.php`

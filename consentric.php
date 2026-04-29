@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Consentric — Truly Free Cookie Consent
+ * Plugin Name:       Consentric — Simple Cookie Consent
  * Plugin URI:        https://github.com/sergiorsmaster/consentric
  * Description:       A simple, free, and open-source cookie consent banner. No hidden Pro features, no subscription.
  * Version:           0.6.0

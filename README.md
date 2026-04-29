@@ -1,4 +1,4 @@
-# Consentric — Truly Free Cookie Consent
+# Consentric — Simple Cookie Consent
 
 A free, open-source WordPress cookie consent banner plugin. No Pro tier, no subscription, no tracking.
 

@@ -1,4 +1,4 @@
-=== Consentric — Truly Free Cookie Consent ===
+=== Consentric — Simple Cookie Consent ===
 Contributors: sergiorsmaster
 Tags: cookie consent, GDPR, CCPA, cookie banner, consent mode
 Requires at least: 6.0
