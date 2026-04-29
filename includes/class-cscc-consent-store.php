@@ -2,16 +2,16 @@
 /**
  * Server-side consent reader.
  *
- * Reads the scc_consent cookie set by the JS layer so PHP can gate
+ * Reads the cscc_consent cookie set by the JS layer so PHP can gate
  * server-rendered output (e.g. embeds) on consent status.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class SCC_Consent_Store {
+class CSCC_Consent_Store {
 
-	const COOKIE_NAME = 'scc_consent';
+	const COOKIE_NAME = 'cscc_consent';
 
 	/**
 	 * Returns the full consent array from the cookie, or null if not set.
