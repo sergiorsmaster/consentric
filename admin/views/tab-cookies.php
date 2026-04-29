@@ -6,22 +6,29 @@ if (!defined('ABSPATH')) {
 global $wpdb;
 $table = $wpdb->prefix . 'cscc_cookies';
 
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only display hint, action is nonce-verified in class-cscc-admin.php
-$edit_id = isset( $_GET['action'], $_GET['cookie_id'] ) && 'edit_cookie' === sanitize_key( wp_unslash( $_GET['action'] ) )
-	? absint( $_GET['cookie_id'] )
-	: 0;
-// phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table is a trusted prefix + constant
-$edit_cookie = $edit_id ? $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $edit_id ) ) : null;
+// Edit cookie: verify nonce before reading cookie_id from URL.
+$edit_id     = 0;
+$edit_cookie = null;
+if ( isset( $_GET['action'], $_GET['cookie_id'], $_GET['_wpnonce'] )
+	&& 'edit_cookie' === sanitize_key( wp_unslash( $_GET['action'] ) )
+	&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'cscc_edit_cookie' )
+) {
+	$edit_id = absint( $_GET['cookie_id'] );
+}
+if ( $edit_id ) {
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table is a trusted prefix + constant
+	$edit_cookie = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table} WHERE id = %d", $edit_id ) );
+}
 
-// Status messages
+// Status messages via transient (set on redirect in class-cscc-admin.php).
 $messages = array(
 	'added'   => __( 'Cookie added.', 'consentric' ),
 	'updated' => __( 'Cookie updated.', 'consentric' ),
 	'deleted' => __( 'Cookie deleted.', 'consentric' ),
 );
-// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only display feedback
-$cscc_msg = isset( $_GET['cscc_msg'] ) ? sanitize_key( wp_unslash( $_GET['cscc_msg'] ) ) : '';
+$cscc_msg = get_transient( 'cscc_admin_notice' );
 if ( $cscc_msg && isset( $messages[ $cscc_msg ] ) ) {
+	delete_transient( 'cscc_admin_notice' );
 	echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $messages[ $cscc_msg ] ) . '</p></div>';
 }
 
@@ -43,8 +50,7 @@ $page_url = admin_url('options-general.php?page=cscc-cookie-consent&tab=cookies'
 <div class="cscc-tab-content">
 
 	<!-- Add / Edit form -->
-	<?php // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only display toggle ?>
-	<div class="cscc-cookie-form-wrap" id="cscc-cookie-form-wrap" <?php echo ( ! $edit_cookie && empty( $_GET['add'] ) ) ? 'style="display:none"' : ''; ?>>
+	<div class="cscc-cookie-form-wrap" id="cscc-cookie-form-wrap" <?php echo ! $edit_cookie ? 'style="display:none"' : ''; ?>>
 
 		<h2 class="cscc-section-title">
 			<?php echo $edit_cookie ? esc_html__('Edit Cookie', 'consentric') : esc_html__('Add Cookie', 'consentric'); ?>
@@ -188,10 +194,10 @@ $page_url = admin_url('options-general.php?page=cscc-cookie-consent&tab=cookies'
 						<td><?php echo esc_html($cookie->duration); ?></td>
 						<td><?php echo esc_html($sources[$cookie->source] ?? $cookie->source); ?></td>
 						<td class="cscc-row-actions">
-							<a href="<?php echo esc_url(add_query_arg(array(
+							<a href="<?php echo esc_url(wp_nonce_url(add_query_arg(array(
 								'action' => 'edit_cookie',
 								'cookie_id' => $cookie->id,
-							), $page_url)); ?>">
+							), $page_url), 'cscc_edit_cookie')); ?>">
 								<?php esc_html_e('Edit', 'consentric'); ?>
 							</a>
 							&nbsp;|&nbsp;

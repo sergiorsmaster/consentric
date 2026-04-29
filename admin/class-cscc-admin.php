@@ -116,11 +116,11 @@ class CSCC_Admin {
 			if ( $cookie_id ) {
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 				$wpdb->update( $table, $data, array( 'id' => $cookie_id ) );
-				$redirect .= '&cscc_msg=updated';
+				set_transient( 'cscc_admin_notice', 'updated', 30 );
 			} else {
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 				$wpdb->insert( $table, $data );
-				$redirect .= '&cscc_msg=added';
+				set_transient( 'cscc_admin_notice', 'added', 30 );
 			}
 
 			wp_safe_redirect( $redirect );
@@ -135,7 +135,8 @@ class CSCC_Admin {
 			$cookie_id = isset( $_GET['cookie_id'] ) ? absint( $_GET['cookie_id'] ) : 0;
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 			$wpdb->delete( $table, array( 'id' => $cookie_id ) );
-			wp_safe_redirect( $redirect . '&cscc_msg=deleted' );
+			set_transient( 'cscc_admin_notice', 'deleted', 30 );
+			wp_safe_redirect( $redirect );
 			exit;
 		}
 	}
